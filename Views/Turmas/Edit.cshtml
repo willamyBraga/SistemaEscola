@@ -1,0 +1,51 @@
+@model SistemaEscola.Models.Turma
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>@Html.DisplayNameForModel()</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" value="@Model.Id" />
+            <div class="form-group">
+                <label class="control-label">@Html.DisplayNameFor(model => model.Sala)</label>
+                <input name="Sala" value="@Model.Sala" class="form-control" value="Sala" />
+                <span asp-validation-for="Sala" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">
+                    @Html.DisplayNameFor(model => model.Professor.Nome)
+                </label>
+                <select name="IdProfessor" class="custom-select">
+                    @foreach (var professor in ViewBag.professores)
+                    {
+                        if(Model.Professor.Id == professor.Id)
+                        {
+                            <option value="@professor.Id" selected>@professor.Nome</option>
+                        }
+                        else {
+                            <option value="@professor.Id">@professor.Nome</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

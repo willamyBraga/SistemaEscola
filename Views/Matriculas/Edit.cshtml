@@ -1,0 +1,70 @@
+@model SistemaEscola.Models.Matricula
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>@Html.DisplayNameForModel()</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" value="@Model.Id" />
+            <div class="form-group">
+                <label class="control-label">
+                    @Html.DisplayNameFor(model => model.DataMatricula)
+                </label>
+                <input asp-for="DataMatricula" class="form-control"  />
+                <span asp-validation-for="DataMatricula" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">
+                    @Html.DisplayNameFor(model => model.Turma)
+                </label>
+                <select name="IdTurma" class="custom-select">
+                    @foreach (var turma in ViewBag.turmas)
+                    {
+                        if(Model.Turma.Id == turma.Id)
+                        {
+                            <option value="@turma.Id" selected>@turma.Sala</option>
+                        }
+                        else {
+                            <option value="@turma.Id">@turma.Sala</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">
+                    @Html.DisplayNameFor(model => model.Aluno)
+                </label>
+                <select name="IdAluno" class="custom-select">
+                    @foreach (var aluno in ViewBag.alunos)
+                    {
+                        if(Model.Aluno.Id == aluno.Id)
+                        {
+                            <option value="@aluno.Id" selected>@aluno.Nome</option>
+                        }
+                        else {
+                            <option value="@aluno.Id">@aluno.Nome</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

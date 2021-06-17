@@ -1,0 +1,33 @@
+img.icon {
+    width: 150px;
+    height: 150px;
+    animation-name: sideAnimation;
+    animation-duration: .8s;
+}
+
+button.entity {
+    animation-name: expandAnimation;
+    animation-duration: 1s;
+}
+
+
+@keyframes expandAnimation {
+    from {
+        opacity: 0;
+        width: 0;
+    }
+    to {
+        opacity: 1;
+        width: 100%;
+    }
+}
+
+@keyframes sideAnimation {
+    
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
